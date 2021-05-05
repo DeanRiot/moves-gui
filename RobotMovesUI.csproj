@@ -46,34 +46,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\RobotSettings.cs" />
     <Compile Include="Class\SendBasicMoves.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Class\SendPWMMoves.cs" />
+    <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Log.cs">
+    <Compile Include="Forms\Log.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Log.Designer.cs">
+    <Compile Include="Forms\Log.Designer.cs">
       <DependentUpon>Log.cs</DependentUpon>
     </Compile>
-    <Compile Include="PortConfig.cs">
+    <Compile Include="Forms\PortConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PortConfig.Designer.cs">
+    <Compile Include="Forms\PortConfig.Designer.cs">
       <DependentUpon>PortConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Log.resx">
+    <EmbeddedResource Include="Forms\Log.resx">
       <DependentUpon>Log.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PortConfig.resx">
+    <EmbeddedResource Include="Forms\PortConfig.resx">
       <DependentUpon>PortConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -100,29 +102,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="batt.png" />
+    <Content Include="arduinoDescription.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="BA.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="FA.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="LA.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="RA.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="RottationL.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="RottationR.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="stop.png" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

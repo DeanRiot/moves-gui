@@ -132,7 +132,6 @@ namespace RobotMovesUI
             // BatteryLevel
             // 
             this.BatteryLevel.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.BatteryLevel.BackgroundImage = global::RobotMovesUI.Properties.Resources.batt;
             this.BatteryLevel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BatteryLevel.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.BatteryLevel.Name = "BatteryLevel";
@@ -209,7 +208,6 @@ namespace RobotMovesUI
             // 
             // RightButton
             // 
-            this.RightButton.BackgroundImage = global::RobotMovesUI.Properties.Resources.RottationR;
             this.RightButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.RightButton.ForeColor = System.Drawing.Color.Red;
             this.RightButton.Location = new System.Drawing.Point(133, 214);
@@ -221,7 +219,6 @@ namespace RobotMovesUI
             // 
             // LeftButton
             // 
-            this.LeftButton.BackgroundImage = global::RobotMovesUI.Properties.Resources.RottationL;
             this.LeftButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.LeftButton.ForeColor = System.Drawing.Color.Red;
             this.LeftButton.Location = new System.Drawing.Point(12, 214);
@@ -242,7 +239,6 @@ namespace RobotMovesUI
             // 
             // LeftIndependedButton
             // 
-            this.LeftIndependedButton.BackgroundImage = global::RobotMovesUI.Properties.Resources.LA;
             this.LeftIndependedButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.LeftIndependedButton.ForeColor = System.Drawing.Color.Red;
             this.LeftIndependedButton.Location = new System.Drawing.Point(6, 123);
@@ -254,7 +250,6 @@ namespace RobotMovesUI
             // 
             // RightIndependedButton
             // 
-            this.RightIndependedButton.BackgroundImage = global::RobotMovesUI.Properties.Resources.RA;
             this.RightIndependedButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.RightIndependedButton.ForeColor = System.Drawing.Color.Red;
             this.RightIndependedButton.Location = new System.Drawing.Point(133, 123);
@@ -266,7 +261,6 @@ namespace RobotMovesUI
             // 
             // BackButton
             // 
-            this.BackButton.BackgroundImage = global::RobotMovesUI.Properties.Resources.BA;
             this.BackButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BackButton.ForeColor = System.Drawing.Color.Red;
             this.BackButton.Location = new System.Drawing.Point(69, 214);
@@ -278,7 +272,6 @@ namespace RobotMovesUI
             // 
             // StopButton
             // 
-            this.StopButton.BackgroundImage = global::RobotMovesUI.Properties.Resources.stop;
             this.StopButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.StopButton.Location = new System.Drawing.Point(69, 123);
             this.StopButton.Name = "StopButton";
@@ -288,7 +281,6 @@ namespace RobotMovesUI
             // 
             // ForwardButton
             // 
-            this.ForwardButton.BackgroundImage = global::RobotMovesUI.Properties.Resources.FA;
             this.ForwardButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ForwardButton.ForeColor = System.Drawing.Color.Red;
             this.ForwardButton.Location = new System.Drawing.Point(69, 42);
@@ -297,6 +289,7 @@ namespace RobotMovesUI
             this.ForwardButton.TabIndex = 0;
             this.ForwardButton.Text = "W";
             this.ForwardButton.UseVisualStyleBackColor = true;
+            this.ForwardButton.Click += new System.EventHandler(this.ForwardButton_Click);
             this.ForwardButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ForwardButton_KeyDown);
             // 
             // panel2
@@ -356,6 +349,7 @@ namespace RobotMovesUI
             this.MinimumSize = new System.Drawing.Size(387, 380);
             this.Name = "Form1";
             this.Text = "Система управления роботом";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.InfoPanel.ResumeLayout(false);

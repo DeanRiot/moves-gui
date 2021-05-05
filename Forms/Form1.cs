@@ -3,12 +3,14 @@ using System.Windows.Forms;
 using System.IO.Ports;
 using System.Threading;
 using System.Threading.Tasks;
+using RobotMovesUI.Class;
 
 namespace RobotMovesUI
 {
     public partial class Form1 : Form
     {
         public SerialPort port = new SerialPort();
+        public SendBasicMoves moves = new SendBasicMoves();
         bool showLog = false;
         
         public Form1()
@@ -78,33 +80,53 @@ namespace RobotMovesUI
 
         private void ForwardButton_KeyDown(object sender, KeyEventArgs e)
         {
-                switch(e.KeyData.ToString())
+            if (moves.PortStatus())
+            {
+                switch (e.KeyData.ToString())
                 {
                     case "W":
-                    Console.WriteLine("go forward");
-                    break;
+                        moves.GoForward();
+                        break;
 
                     case "Q":
-                    Console.WriteLine("go left independed");
-                    break;
+                        moves.TurnLeftIndepended();
+                        break;
 
                     case "A":
-                    Console.WriteLine("go left");
-                    break;
+                        moves.TurnLeft();
+                        break;
 
                     case "S":
-                    Console.WriteLine("go back");
-                    break;
+                        moves.GoBack();
+                        break;
 
                     case "D":
-                    Console.WriteLine("go right");
-                    break;
+                        moves.TurnRight();
+                        break;
 
                     case "E":
-                    Console.WriteLine("go right independed");
-                    break;
+                        moves.TurnRightIndepended();
+                        break;
+                }
+            }       
+
+        }
+
+        private void ForwardButton_Click(object sender, EventArgs e)
+        {
+            if(moves.PortStatus())
+            {
+                moves.GoForward();
             }
-                
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(moves.PortStatus())
+            {
+                moves.Stop();
+                port.Close();
+            }
 
         }
     }

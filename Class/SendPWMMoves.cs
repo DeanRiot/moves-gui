@@ -2,9 +2,8 @@
 
 namespace RobotMovesUI.Class
 {
-    public class SendBasicMoves
+    class SendPWMMoves
     {
-
         private SerialPort serialPort;
 
         public void SetPort(SerialPort port)
@@ -21,32 +20,32 @@ namespace RobotMovesUI.Class
 
         public void GoForward()
         {
-            serialPort.WriteLine("FR;");
+            serialPort.WriteLine("FRP;");
         }
 
         public void GoBack()
         {
-            serialPort.WriteLine("GB;");
+            serialPort.WriteLine("GBP;");
         }
 
         public void TurnRight()
         {
-            serialPort.WriteLine("TRS;");
+            serialPort.WriteLine("TRSP;");
         }
 
         public void TurnRightIndepended()
         {
-            serialPort.WriteLine("TRI;");
+            serialPort.WriteLine("TRIP;");
         }
 
         public void TurnLeft()
         {
-            serialPort.WriteLine("TLS;");
+            serialPort.WriteLine("TLSP;");
         }
 
         public void TurnLeftIndepended()
         {
-            serialPort.WriteLine("TLI;");
+            serialPort.WriteLine("TLIP;");
         }
 
         public void Stop()
@@ -54,5 +53,19 @@ namespace RobotMovesUI.Class
             serialPort.WriteLine("STP;");
         }
 
+        public void SetPWMFreq(int value)
+        {
+            if (value < 0 || value > 250)
+                return;
+            else
+                serialPort.WriteLine($"SF,{value};");
+        }
+        public int GetPWMFreq()
+        {
+            //add parser
+            return 250;
+        }
+
     }
 }
+
