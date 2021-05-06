@@ -52,7 +52,6 @@ namespace RobotMovesUI.Class
         {
             serialPort.WriteLine("STP;");
         }
-
         public void SetPWMFreq(int value)
         {
             if (value < 0 || value > 250)
@@ -60,12 +59,14 @@ namespace RobotMovesUI.Class
             else
                 serialPort.WriteLine($"SF,{value};");
         }
-        public int GetPWMFreq()
+        public void TurnRightByFreq(int value)
         {
-            //add parser
-            return 250;
+            serialPort.WriteLine($"TRBF,{value}");
         }
-
+        public void TurnLeftByFreq(int value)
+        {
+            serialPort.WriteLine($"TLBF,{value}");
+        }
     }
 }
 

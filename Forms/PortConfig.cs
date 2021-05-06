@@ -26,7 +26,8 @@ namespace RobotMovesUI
             form1.port.PortName = PortConf.SelectedItem.ToString();
             MessageBox.Show("Конфигурация сохранена");
             form1.port.Open();
-            form1.moves.SetPort(form1.port);
+            form1.info.SetPort(form1.port);
+            form1.moves = new Class.RobotMoves(form1.port);
         }
     }
 }

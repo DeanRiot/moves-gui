@@ -2,7 +2,7 @@
 
 namespace RobotMovesUI.Class
 {
-    public class SendBasicMoves
+    class SendBasicMoves
     {
 
         private SerialPort serialPort;

@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\GetInfo.cs" />
+    <Compile Include="Class\RobotMoves.cs" />
     <Compile Include="Class\RobotSettings.cs" />
     <Compile Include="Class\SendBasicMoves.cs" />
     <Compile Include="Class\SendPWMMoves.cs" />
@@ -61,6 +63,12 @@
     <Compile Include="Forms\Log.Designer.cs">
       <DependentUpon>Log.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\PinsConfigForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PinsConfigForm.Designer.cs">
+      <DependentUpon>PinsConfigForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\PortConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +82,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Log.resx">
       <DependentUpon>Log.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PinsConfigForm.resx">
+      <DependentUpon>PinsConfigForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PortConfig.resx">
       <DependentUpon>PortConfig.cs</DependentUpon>
@@ -103,6 +114,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="arduinoDescription.txt" />
+    <None Include="Res\stop.png" />
+    <None Include="Res\CircleArrowRight.png" />
+    <None Include="Res\CircleArrowLeft.png" />
+    <None Include="Res\h.png" />
+    <None Include="Res\Battery.png" />
+    <None Include="Res\ArrowUPpng.png" />
+    <None Include="Res\ArrowRight.png" />
+    <None Include="Res\ArrowLeft.png" />
+    <None Include="Res\ArrowDown.png" />
+    <None Include="Res\Robot.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

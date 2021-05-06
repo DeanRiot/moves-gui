@@ -18,20 +18,6 @@ namespace RobotMovesUI.Class
             else return false;
         }
 
-        public string getInfo()
-        {
-            serialPort.WriteLine("Info;");
-            //setParser
-            return "null";
-        }
-
-        public string getBattValue()
-        {
-            serialPort.WriteLine("BatLVL;");
-            //setParser
-            return "null";
-        }
-
         public void setPins(int leftForward, int leftBack,
                             int rightForward, int rightBack)
         {
