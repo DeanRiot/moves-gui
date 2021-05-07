@@ -29,10 +29,12 @@ namespace RobotMovesUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Connection = new System.Windows.Forms.ToolStripMenuItem();
             this.ComMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.CloseMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.RobotConfigMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.PinsConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.PortStatus = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,12 +55,17 @@ namespace RobotMovesUI
             this.panel3 = new System.Windows.Forms.Panel();
             this.LeftMotorPB = new System.Windows.Forms.ProgressBar();
             this.RightMotorPB = new System.Windows.Forms.ProgressBar();
+            this.batteryTimer = new System.Windows.Forms.Timer(this.components);
+            this.StatusTimer = new System.Windows.Forms.Timer(this.components);
+            this.SpeedCheck = new System.Windows.Forms.CheckBox();
+            this.SpeedTrack = new System.Windows.Forms.TrackBar();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RightMotorTrack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LeftMotorTrack)).BeginInit();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SpeedTrack)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -85,7 +92,8 @@ namespace RobotMovesUI
             // Connection
             // 
             this.Connection.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ComMenu});
+            this.ComMenu,
+            this.CloseMenu});
             this.Connection.Name = "Connection";
             this.Connection.Size = new System.Drawing.Size(141, 22);
             this.Connection.Text = "Соединение";
@@ -96,6 +104,13 @@ namespace RobotMovesUI
             this.ComMenu.Size = new System.Drawing.Size(190, 22);
             this.ComMenu.Text = "Конфигурация порта";
             this.ComMenu.Click += new System.EventHandler(this.ComMenu_Click);
+            // 
+            // CloseMenu
+            // 
+            this.CloseMenu.Name = "CloseMenu";
+            this.CloseMenu.Size = new System.Drawing.Size(190, 22);
+            this.CloseMenu.Text = "Отключиться";
+            this.CloseMenu.Click += new System.EventHandler(this.CloseMenu_Click);
             // 
             // RobotConfigMenu
             // 
@@ -119,7 +134,6 @@ namespace RobotMovesUI
             this.PortStatus.Name = "PortStatus";
             this.PortStatus.Size = new System.Drawing.Size(164, 34);
             this.PortStatus.Text = "Устройство не подкючено";
-            this.PortStatus.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // BatteryLevel
             // 
@@ -137,6 +151,8 @@ namespace RobotMovesUI
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.SpeedTrack);
+            this.panel1.Controls.Add(this.SpeedCheck);
             this.panel1.Controls.Add(this.RightButton);
             this.panel1.Controls.Add(this.LeftButton);
             this.panel1.Controls.Add(this.label4);
@@ -155,6 +171,7 @@ namespace RobotMovesUI
             // 
             this.RightButton.BackgroundImage = global::RobotMovesUI.Properties.Resources.CircleArrowRight;
             this.RightButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.RightButton.Enabled = false;
             this.RightButton.ForeColor = System.Drawing.Color.Red;
             this.RightButton.Location = new System.Drawing.Point(152, 218);
             this.RightButton.Name = "RightButton";
@@ -162,13 +179,14 @@ namespace RobotMovesUI
             this.RightButton.TabIndex = 8;
             this.RightButton.Tag = "6";
             this.RightButton.UseVisualStyleBackColor = true;
-            this.RightButton.Click += new System.EventHandler(this.ForwardButton_Click);
-            this.RightButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ForwardButton_KeyDown);
+            this.RightButton.Click += new System.EventHandler(this.Buttons_Click);
+            this.RightButton.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Button_KeyUp);
             // 
             // LeftButton
             // 
             this.LeftButton.BackgroundImage = global::RobotMovesUI.Properties.Resources.CircleArrowLeft;
             this.LeftButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.LeftButton.Enabled = false;
             this.LeftButton.ForeColor = System.Drawing.Color.Red;
             this.LeftButton.Location = new System.Drawing.Point(10, 218);
             this.LeftButton.Name = "LeftButton";
@@ -176,8 +194,8 @@ namespace RobotMovesUI
             this.LeftButton.TabIndex = 7;
             this.LeftButton.Tag = "4";
             this.LeftButton.UseVisualStyleBackColor = true;
-            this.LeftButton.Click += new System.EventHandler(this.ForwardButton_Click);
-            this.LeftButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ForwardButton_KeyDown);
+            this.LeftButton.Click += new System.EventHandler(this.Buttons_Click);
+            this.LeftButton.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Button_KeyUp);
             // 
             // label4
             // 
@@ -193,6 +211,7 @@ namespace RobotMovesUI
             // 
             this.LeftIndependedButton.BackgroundImage = global::RobotMovesUI.Properties.Resources.ArrowLeft;
             this.LeftIndependedButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.LeftIndependedButton.Enabled = false;
             this.LeftIndependedButton.ForeColor = System.Drawing.Color.Red;
             this.LeftIndependedButton.Location = new System.Drawing.Point(10, 144);
             this.LeftIndependedButton.Name = "LeftIndependedButton";
@@ -200,13 +219,14 @@ namespace RobotMovesUI
             this.LeftIndependedButton.TabIndex = 4;
             this.LeftIndependedButton.Tag = "1";
             this.LeftIndependedButton.UseVisualStyleBackColor = true;
-            this.LeftIndependedButton.Click += new System.EventHandler(this.ForwardButton_Click);
-            this.LeftIndependedButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ForwardButton_KeyDown);
+            this.LeftIndependedButton.Click += new System.EventHandler(this.Buttons_Click);
+            this.LeftIndependedButton.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Button_KeyUp);
             // 
             // RightIndependedButton
             // 
             this.RightIndependedButton.BackgroundImage = global::RobotMovesUI.Properties.Resources.ArrowRight;
             this.RightIndependedButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.RightIndependedButton.Enabled = false;
             this.RightIndependedButton.ForeColor = System.Drawing.Color.Red;
             this.RightIndependedButton.Location = new System.Drawing.Point(152, 144);
             this.RightIndependedButton.Name = "RightIndependedButton";
@@ -214,13 +234,14 @@ namespace RobotMovesUI
             this.RightIndependedButton.TabIndex = 3;
             this.RightIndependedButton.Tag = "3";
             this.RightIndependedButton.UseVisualStyleBackColor = true;
-            this.RightIndependedButton.Click += new System.EventHandler(this.ForwardButton_Click);
-            this.RightIndependedButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ForwardButton_KeyDown);
+            this.RightIndependedButton.Click += new System.EventHandler(this.Buttons_Click);
+            this.RightIndependedButton.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Button_KeyUp);
             // 
             // BackButton
             // 
             this.BackButton.BackgroundImage = global::RobotMovesUI.Properties.Resources.ArrowDown;
             this.BackButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BackButton.Enabled = false;
             this.BackButton.ForeColor = System.Drawing.Color.Red;
             this.BackButton.Location = new System.Drawing.Point(80, 218);
             this.BackButton.Name = "BackButton";
@@ -228,26 +249,28 @@ namespace RobotMovesUI
             this.BackButton.TabIndex = 2;
             this.BackButton.Tag = "5";
             this.BackButton.UseVisualStyleBackColor = true;
-            this.BackButton.Click += new System.EventHandler(this.ForwardButton_Click);
-            this.BackButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ForwardButton_KeyDown);
+            this.BackButton.Click += new System.EventHandler(this.Buttons_Click);
+            this.BackButton.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Button_KeyUp);
             // 
             // StopButton
             // 
             this.StopButton.BackgroundImage = global::RobotMovesUI.Properties.Resources.stop;
             this.StopButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.StopButton.Enabled = false;
             this.StopButton.Location = new System.Drawing.Point(82, 144);
             this.StopButton.Name = "StopButton";
             this.StopButton.Size = new System.Drawing.Size(55, 55);
             this.StopButton.TabIndex = 1;
             this.StopButton.Tag = "2";
             this.StopButton.UseVisualStyleBackColor = true;
-            this.StopButton.Click += new System.EventHandler(this.ForwardButton_Click);
-            this.StopButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ForwardButton_KeyDown);
+            this.StopButton.Click += new System.EventHandler(this.Buttons_Click);
+            this.StopButton.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Button_KeyUp);
             // 
             // ForwardButton
             // 
             this.ForwardButton.BackgroundImage = global::RobotMovesUI.Properties.Resources.ArrowUPpng;
             this.ForwardButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ForwardButton.Enabled = false;
             this.ForwardButton.ForeColor = System.Drawing.Color.Red;
             this.ForwardButton.Location = new System.Drawing.Point(80, 65);
             this.ForwardButton.Name = "ForwardButton";
@@ -255,8 +278,8 @@ namespace RobotMovesUI
             this.ForwardButton.TabIndex = 0;
             this.ForwardButton.Tag = "0";
             this.ForwardButton.UseVisualStyleBackColor = true;
-            this.ForwardButton.Click += new System.EventHandler(this.ForwardButton_Click);
-            this.ForwardButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ForwardButton_KeyDown);
+            this.ForwardButton.Click += new System.EventHandler(this.Buttons_Click);
+            this.ForwardButton.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Button_KeyUp);
             // 
             // panel2
             // 
@@ -272,24 +295,28 @@ namespace RobotMovesUI
             // 
             // RightMotorTrack
             // 
+            this.RightMotorTrack.Enabled = false;
             this.RightMotorTrack.Location = new System.Drawing.Point(148, 42);
             this.RightMotorTrack.Maximum = 250;
             this.RightMotorTrack.Name = "RightMotorTrack";
             this.RightMotorTrack.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.RightMotorTrack.Size = new System.Drawing.Size(45, 297);
             this.RightMotorTrack.TabIndex = 7;
+            this.RightMotorTrack.Tag = "12";
             this.RightMotorTrack.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             this.RightMotorTrack.Value = 125;
             this.RightMotorTrack.Scroll += new System.EventHandler(this.RightMotorTrack_Scroll);
             // 
             // LeftMotorTrack
             // 
+            this.LeftMotorTrack.Enabled = false;
             this.LeftMotorTrack.Location = new System.Drawing.Point(12, 42);
             this.LeftMotorTrack.Maximum = 250;
             this.LeftMotorTrack.Name = "LeftMotorTrack";
             this.LeftMotorTrack.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.LeftMotorTrack.Size = new System.Drawing.Size(45, 297);
             this.LeftMotorTrack.TabIndex = 6;
+            this.LeftMotorTrack.Tag = "11";
             this.LeftMotorTrack.Value = 125;
             this.LeftMotorTrack.Scroll += new System.EventHandler(this.LeftMotorTrack_Scroll);
             // 
@@ -297,7 +324,7 @@ namespace RobotMovesUI
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(27, 14);
+            this.label3.Location = new System.Drawing.Point(13, 14);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(178, 17);
             this.label3.TabIndex = 5;
@@ -318,21 +345,56 @@ namespace RobotMovesUI
             // 
             // LeftMotorPB
             // 
-            this.LeftMotorPB.Location = new System.Drawing.Point(5, 2);
+            this.LeftMotorPB.Dock = System.Windows.Forms.DockStyle.Top;
+            this.LeftMotorPB.Enabled = false;
+            this.LeftMotorPB.Location = new System.Drawing.Point(0, 0);
             this.LeftMotorPB.Maximum = 250;
             this.LeftMotorPB.Name = "LeftMotorPB";
-            this.LeftMotorPB.Size = new System.Drawing.Size(342, 18);
+            this.LeftMotorPB.Size = new System.Drawing.Size(322, 18);
             this.LeftMotorPB.TabIndex = 2;
+            this.LeftMotorPB.Tag = "9";
             this.LeftMotorPB.Value = 125;
             // 
             // RightMotorPB
             // 
-            this.RightMotorPB.Location = new System.Drawing.Point(5, 334);
+            this.RightMotorPB.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.RightMotorPB.Enabled = false;
+            this.RightMotorPB.Location = new System.Drawing.Point(0, 333);
             this.RightMotorPB.Maximum = 250;
             this.RightMotorPB.Name = "RightMotorPB";
-            this.RightMotorPB.Size = new System.Drawing.Size(342, 18);
+            this.RightMotorPB.Size = new System.Drawing.Size(322, 18);
             this.RightMotorPB.TabIndex = 3;
+            this.RightMotorPB.Tag = "10";
             this.RightMotorPB.Value = 125;
+            // 
+            // batteryTimer
+            // 
+            this.batteryTimer.Interval = 60000;
+            this.batteryTimer.Tick += new System.EventHandler(this.batteryTimer_Tick);
+            // 
+            // StatusTimer
+            // 
+            this.StatusTimer.Interval = 1000;
+            this.StatusTimer.Tick += new System.EventHandler(this.StatusTimer_Tick);
+            // 
+            // SpeedCheck
+            // 
+            this.SpeedCheck.AutoSize = true;
+            this.SpeedCheck.Location = new System.Drawing.Point(10, 283);
+            this.SpeedCheck.Name = "SpeedCheck";
+            this.SpeedCheck.Size = new System.Drawing.Size(142, 17);
+            this.SpeedCheck.TabIndex = 9;
+            this.SpeedCheck.Text = "С заданной скоростью";
+            this.SpeedCheck.UseVisualStyleBackColor = true;
+            // 
+            // SpeedTrack
+            // 
+            this.SpeedTrack.Location = new System.Drawing.Point(3, 306);
+            this.SpeedTrack.Maximum = 250;
+            this.SpeedTrack.Name = "SpeedTrack";
+            this.SpeedTrack.Size = new System.Drawing.Size(225, 45);
+            this.SpeedTrack.TabIndex = 10;
+            this.SpeedTrack.Scroll += new System.EventHandler(this.SpeedTrack_Scroll);
             // 
             // Form1
             // 
@@ -359,6 +421,7 @@ namespace RobotMovesUI
             ((System.ComponentModel.ISupportInitialize)(this.RightMotorTrack)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LeftMotorTrack)).EndInit();
             this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SpeedTrack)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -390,6 +453,11 @@ namespace RobotMovesUI
         private System.Windows.Forms.TrackBar LeftMotorTrack;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.ToolStripMenuItem CloseMenu;
+        private System.Windows.Forms.Timer batteryTimer;
+        private System.Windows.Forms.Timer StatusTimer;
+        private System.Windows.Forms.TrackBar SpeedTrack;
+        private System.Windows.Forms.CheckBox SpeedCheck;
     }
 }
 

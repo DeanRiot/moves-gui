@@ -38,6 +38,7 @@ namespace RobotMovesUI
             // 
             // PortConf
             // 
+            this.PortConf.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.PortConf.FormattingEnabled = true;
             this.PortConf.Location = new System.Drawing.Point(84, 15);
             this.PortConf.Name = "PortConf";
@@ -46,6 +47,7 @@ namespace RobotMovesUI
             // 
             // SpeedConf
             // 
+            this.SpeedConf.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SpeedConf.FormattingEnabled = true;
             this.SpeedConf.Items.AddRange(new object[] {
             "300",

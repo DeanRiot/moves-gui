@@ -46,22 +46,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\Moves\BackMoves\BackFullSpeed.cs" />
+    <Compile Include="Class\Moves\BackMoves\BackPwm.cs" />
+    <Compile Include="Class\Moves\BackMoves\IGoBack.cs" />
+    <Compile Include="Class\CalcPwm.cs" />
+    <Compile Include="Class\Moves\ForwardMoves\ForwardFullSpeed.cs" />
+    <Compile Include="Class\Moves\ForwardMoves\GoForwardPwm.cs" />
+    <Compile Include="Class\Moves\ForwardMoves\IGoForward.cs" />
     <Compile Include="Class\GetInfo.cs" />
-    <Compile Include="Class\RobotMoves.cs" />
+    <Compile Include="Class\Moves\LeftMoves\ITurnLeft.cs" />
+    <Compile Include="Class\Moves\LeftMoves\TurnLeftFullSpeed.cs" />
+    <Compile Include="Class\Moves\LeftMoves\TurnLeftMotor.cs" />
+    <Compile Include="Class\Moves\LeftMoves\TurnLeftMotorPwm.cs" />
+    <Compile Include="Class\Moves\LeftMoves\TurnLeftPwm.cs" />
+    <Compile Include="Class\Moves\MovesFreq\IFreqMove.cs" />
+    <Compile Include="Class\Moves\MovesFreq\TurnLeftMotorWithSpeed.cs" />
+    <Compile Include="Class\Moves\MovesFreq\TurnRightMotorWithSpeed.cs" />
+    <Compile Include="Class\Port.cs" />
+    <Compile Include="Class\Moves\RightMoves\ITurnRight.cs" />
+    <Compile Include="Class\Moves\RightMoves\TurnRightFullSpeed.cs" />
+    <Compile Include="Class\Moves\RightMoves\TurnRightMotor.cs" />
+    <Compile Include="Class\Moves\RightMoves\TurnLeftMotorPwm.cs" />
+    <Compile Include="Class\Moves\RightMoves\TurnLeftPwm.cs" />
+    <Compile Include="Class\Trash\RobotMoves.cs" />
     <Compile Include="Class\RobotSettings.cs" />
-    <Compile Include="Class\SendBasicMoves.cs" />
-    <Compile Include="Class\SendPWMMoves.cs" />
+    <Compile Include="Class\Trash\SendBasicMoves.cs" />
+    <Compile Include="Class\Moves\SendMove.cs" />
+    <Compile Include="Class\Trash\SendPWMMoves.cs" />
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Log.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Log.Designer.cs">
-      <DependentUpon>Log.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\PinsConfigForm.cs">
       <SubType>Form</SubType>
@@ -79,9 +95,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Log.resx">
-      <DependentUpon>Log.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PinsConfigForm.resx">
       <DependentUpon>PinsConfigForm.cs</DependentUpon>
@@ -113,7 +126,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="arduinoDescription.txt" />
     <None Include="Res\stop.png" />
     <None Include="Res\CircleArrowRight.png" />
     <None Include="Res\CircleArrowLeft.png" />
@@ -125,5 +137,6 @@
     <None Include="Res\ArrowDown.png" />
     <None Include="Res\Robot.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

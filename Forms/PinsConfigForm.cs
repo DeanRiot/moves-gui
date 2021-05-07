@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using RobotMovesUI.Class;
 
 namespace RobotMovesUI.Forms
 {
     public partial class PinsConfigForm : Form
     {
+        public RobotSettings settings = new RobotSettings();
         public PinsConfigForm()
         {
             InitializeComponent();
@@ -23,6 +18,14 @@ namespace RobotMovesUI.Forms
         }
 
         private void Config_Click(object sender, EventArgs e)
+        {
+            settings.setPins(int.Parse(LeftForwardPin.Text),
+                                int.Parse(LeftBack.Text),
+                                int.Parse(RightForward.Text),
+                                int.Parse(RightBack.Text));
+        }
+
+        private void RightForward_TextChanged(object sender, EventArgs e)
         {
 
         }

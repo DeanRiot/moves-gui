@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
+using RobotMovesUI.Class;
 
 namespace RobotMovesUI
 {
@@ -21,13 +15,33 @@ namespace RobotMovesUI
 
         private void ChangeConfig_Click(object sender, EventArgs e)
         {
-            Form1 form1 = (Form1) Application.OpenForms[0];
-            form1.port.BaudRate = int.Parse(SpeedConf.SelectedItem.ToString());
-            form1.port.PortName = PortConf.SelectedItem.ToString();
-            MessageBox.Show("Конфигурация сохранена");
-            form1.port.Open();
-            form1.info.SetPort(form1.port);
-            form1.moves = new Class.RobotMoves(form1.port);
+            if(PortConf.Text!="" && SpeedConf.Text != "")
+            {
+                Form1 form1 = (Form1)Application.OpenForms[0];
+
+                    Port.port.BaudRate = int.Parse(SpeedConf.Text);
+                    Port.port.PortName = PortConf.Text;
+                    Port.port.ReadTimeout = 1000;
+                try
+                {
+                    Port.port.Open();
+                }
+                catch
+                {
+                    MessageBox.Show("Порт Закрыт");
+                }
+                    
+                    
+                    if (Port.CheckStatus())
+                    {
+                        MessageBox.Show("Конфигурация сохранена");
+                        form1.setPortConfig();
+                    }
+                else
+                {
+                    MessageBox.Show("Порт не доступен!", "Ошибка конфигурации");
+                }
+            }
         }
     }
 }
